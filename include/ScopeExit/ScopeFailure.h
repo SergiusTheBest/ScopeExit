@@ -9,7 +9,7 @@
 
 #define SCOPE_FAILURE_CAT2(x, y) x##y
 #define SCOPE_FAILURE_CAT(x, y) SCOPE_FAILURE_CAT2(x, y)
-#define SCOPE_FAILURE const auto& SCOPE_FAILURE_CAT(scopeFailure_, __COUNTER__) = ScopeExit::MakeScopeFailure() += [&]
+#define SCOPE_FAILURE const auto SCOPE_FAILURE_CAT(scopeFailure_, __COUNTER__) = ScopeExit::MakeScopeFailure() += [&]
 
 namespace ScopeExit
 {
@@ -29,7 +29,9 @@ namespace ScopeExit
             }
         }
 
-        ScopeFailure(ScopeFailure&& other);
+        ScopeFailure(ScopeFailure&& other) : m_fn(std::move(other.m_fn))
+        {
+        }
 
     private:
         ScopeFailure(const ScopeFailure&);

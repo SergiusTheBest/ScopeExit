@@ -9,7 +9,7 @@
 
 #define SCOPE_SUCCESS_CAT2(x, y) x##y
 #define SCOPE_SUCCESS_CAT(x, y) SCOPE_SUCCESS_CAT2(x, y)
-#define SCOPE_SUCCESS const auto& SCOPE_SUCCESS_CAT(scopeSuccess_, __COUNTER__) = ScopeExit::MakeScopeSuccess() += [&]
+#define SCOPE_SUCCESS const auto SCOPE_SUCCESS_CAT(scopeSuccess_, __COUNTER__) = ScopeExit::MakeScopeSuccess() += [&]
 
 namespace ScopeExit
 {
@@ -29,7 +29,9 @@ namespace ScopeExit
             }
         }
 
-        ScopeSuccess(ScopeSuccess&& other);
+        ScopeSuccess(ScopeSuccess&& other) : m_fn(std::move(other.m_fn))
+        {
+        }
 
     private:
         ScopeSuccess(const ScopeSuccess&);

@@ -8,7 +8,7 @@
 
 #define SCOPE_EXIT_CAT2(x, y) x##y
 #define SCOPE_EXIT_CAT(x, y) SCOPE_EXIT_CAT2(x, y)
-#define SCOPE_EXIT const auto& SCOPE_EXIT_CAT(scopeExit_, __COUNTER__) = ScopeExit::MakeScopeExit() += [&]
+#define SCOPE_EXIT const auto SCOPE_EXIT_CAT(scopeExit_, __COUNTER__) = ScopeExit::MakeScopeExit() += [&]
 
 namespace ScopeExit
 {
@@ -25,7 +25,9 @@ namespace ScopeExit
             m_fn();
         }
 
-        ScopeExit(ScopeExit&& other);
+        ScopeExit(ScopeExit&& other) : m_fn(std::move(other.m_fn))
+        {
+        }
 
     private:
         ScopeExit(const ScopeExit&);

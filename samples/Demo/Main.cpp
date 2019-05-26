@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include <ScopeExit/ScopeExit.h>
 #include <ScopeExit/ScopeFailure.h>
 #include <ScopeExit/ScopeSuccess.h>

@@ -16,3 +16,4 @@ elseif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
 endif()
 
 add_subdirectory(Demo)
+add_subdirectory(Html)

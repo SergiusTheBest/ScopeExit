@@ -14,7 +14,7 @@
 - CMake integration
 
 # License
-ScopeExit is licensed under the MPL version 2.0. You can freely use it in your commercial or opensource software.
+ScopeExit is licensed under the [MIT license](https://choosealicense.com/licenses/mit). You can freely use it in your commercial or opensource software.
 
 # Version history
 

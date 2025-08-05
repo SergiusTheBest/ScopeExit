@@ -24,7 +24,11 @@ namespace ScopeExit
         
         ~ScopeFailure()
         { 
+#if __cplusplus >= 201703L
+            if (std::uncaught_exceptions())
+#else
             if (std::uncaught_exception())
+#endif
             {
                 m_fn();
             }

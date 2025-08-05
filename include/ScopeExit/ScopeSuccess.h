@@ -5,7 +5,7 @@
 //
 // Usage:
 //
-// SCOPE_SUCCESS{ cout << "hello"; }; // will be called at the scope success in case of success (no exception is thrown)
+// SCOPE_SUCCESS{ cout << "hello"; }; // will be called at the scope exit in case of success (no exception is thrown)
 //
 
 #define SCOPE_SUCCESS_CAT2(x, y) x##y
@@ -24,7 +24,11 @@ namespace ScopeExit
         
         ~ScopeSuccess()
         { 
+            #if __cplusplus >= 201703L
+            if (!std::uncaught_exceptions())
+            #else
             if (!std::uncaught_exception())
+            #endif
             {
                 m_fn();
             }
